@@ -1,65 +1,61 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addToDo, removeTodo, updateTodo , completeTodo} from "../redux/reducer";
-import ToDoItems from "./ToDoItems";
+import { addTodos } from "../redux/reducer";
+import { GoPlus } from "react-icons/go";
+import { motion } from "framer-motion";
 
 const mapStateToProps = (state) => {
   return {
-    todo: state, //birinci hisse variable secirsen
+    todos: state,
   };
 };
 
-// from reducer
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToDos: (obj) => dispatch(addToDo(obj)),
-    removeTodos: (id) => dispatch(removeTodo(id)),
-    updateTodos: (obj) => dispatch(updateTodo(obj)),
-    completeTodos: (id) => dispatch(completeTodo(id)),
+    addTodo: (obj) => dispatch(addTodos(obj)),
   };
 };
 
 const Todos = (props) => {
   const [todo, setTodo] = useState("");
 
-
-  const inputValue = (e) => {
+  const handleChange = (e) => {
     setTodo(e.target.value);
   };
- 
-  
 
-
+  const add = () => {
+    if (todo === "") {
+      alert("Input is Empty");
+    } else {
+      props.addTodo({
+        id: Math.floor(Math.random() * 1000),
+        item: todo,
+        completed: false,
+      });
+      setTodo("");
+    }
+  };
+  //console.log("props from store", props);
   return (
-    <div className="Todos">
+    <div className="addTodos">
       <input
         type="text"
-        onChange={(e) => inputValue(e)}
+        onChange={(e) => handleChange(e)}
         className="todo-input"
+        value={todo}
       />
-      {/* add list */}
-      <button
-        onClick={() =>
-          props.addToDos({
-            id: Math.floor(Math.random() * 1000),
-            item: todo,
-            completed: false,
-          })
-        }
-      >
-        Add
-      </button>
 
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="add-btn"
+        onClick={() => add()}
+      >
+        <GoPlus />
+      </motion.button>
       <br />
-      {/* <ul>
-        {props.todo.map((elem) => {
-          return (
-          <ToDoItems />
-          );
-        })}
-      </ul> */}
     </div>
   );
 };
-
+//we can use connect method to connect this component with redux store
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

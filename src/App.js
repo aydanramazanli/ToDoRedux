@@ -1,6 +1,8 @@
 import React from 'react';
-import Todos from './companents/Todos'
 import './App.css';
+import  DisplayTodos from './companents/DisplayTodos'
+import Todos from './companents/Todos'
+
 
 
 
@@ -8,7 +10,8 @@ function App() {
 
   return (
     <div className="App">
-   <Todos/>
+<DisplayTodos/>
+<Todos/>
     </div>
   );
 }

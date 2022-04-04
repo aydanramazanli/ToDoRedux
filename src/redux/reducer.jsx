@@ -8,18 +8,18 @@ const toDoReducer=createSlice({
     initialState:state,
     reducers:{
         // add list
-        addToDo:(state, action) => {
+        addTodos:(state, action) => {
             state.push(action.payload);
             return state;
         },
 
         //remove list
-        removeTodo: (state, action) => {
+        removeTodos: (state, action) => {
             return state.filter((item)=> item.id !== action.payload)
         },
 
         //update list
-        updateTodo: (state, action) => {
+        updateTodos: (state, action) => {
             return state.filter((item)=>{
                 if(item.id === action.payload.id){
                     return{
@@ -32,7 +32,7 @@ const toDoReducer=createSlice({
             })
         },
         //completed list
-        completeTodo: (state, action)=>{
+        completeTodos: (state, action)=>{
             return state.map((item)=>{
                 if(item.id === action.payload){
                     return{
@@ -47,5 +47,5 @@ const toDoReducer=createSlice({
     }
 })
 
-export const {addToDo,removeTodo,updateTodo,completeTodo} =toDoReducer.actions
+export const {addTodos,removeTodos,updateTodos,completeTodos} =toDoReducer.actions
 export const reducer = toDoReducer.reducer
