@@ -35,13 +35,13 @@ const Todos = (props) => {
       setTodo("");
     }
   };
-  //console.log("props from store", props);
+  //console.log(props);
   return (
     <div className="addTodos">
       <input
         type="text"
         onChange={(e) => handleChange(e)}
-        className="todo-input"
+        className="border-solid border border-slate-800 rounded-md py-1 px-2 outline-0 text-slate-800 w-56"
         value={todo}
       />
 
@@ -51,11 +51,11 @@ const Todos = (props) => {
         className="add-btn"
         onClick={() => add()}
       >
-        <GoPlus />
+        <GoPlus  className="text-slate-50 mx-2"/>
       </motion.button>
       <br />
     </div>
   );
 };
-//we can use connect method to connect this component with redux store
+
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

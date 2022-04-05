@@ -15,29 +15,28 @@ const TodoItem = (props) => {
 
   const update = (id, value, e) => {
     if (e.which === 13) {
-      //here 13 is key code for enter key
+      // 13 = enter key code 
       updateTodo({ id, item: value });
       inputRef.current.disabled = true;
     }
   };
   return (
     <motion.li
-      initial={{ x: "150vw", transition: { type: "spring", duration: 2 } }}
-      animate={{ x: 0, transition: { type: "spring", duration: 2 } }}
+      initial={{ x: "150vw", transition: { type: "spring", duration: 0.1 } }}
+      animate={{ x: 0, transition: { type: "spring", duration: 0.2 } }}
       whileHover={{
-        scale: 0.9,
-        transition: { type: "spring", duration: 0.1 },
+        scale: 0.8,
       }}
       exit={{
         x: "-60vw",
         scale: [1, 0],
         transition: { duration: 0.5 },
-        backgroundColor: "rgba(255,0,0,1)",
       }}
       key={item.id}
-      className="card"
+     
     >
       <textarea
+       className="px-3 py-1 rounded-sm text-slate-500 outline-0"
         ref={inputRef}
         disabled={inputRef}
         defaultValue={item.item}
@@ -49,8 +48,8 @@ const TodoItem = (props) => {
           whileTap={{ scale: 0.9 }}
           onClick={() => changeFocus()}
         >
-          {" "}
-          <AiFillEdit />{" "}
+      
+          <AiFillEdit />
         </motion.button>
         {item.completed === false && (
           <motion.button
@@ -68,7 +67,7 @@ const TodoItem = (props) => {
           style={{ color: "red" }}
           onClick={() => removeTodo(item.id)}
         >
-          {" "}
+       
           <IoClose />
         </motion.button>{" "}
       </div>
